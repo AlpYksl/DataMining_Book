@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.neighbors import NearestNeighbors
 from scipy.sparse import csr_matrix
+import pickle
 
 books = pd.read_csv('BX-Books.csv', sep=';', error_bad_lines=False, encoding="latin-1")
 books.columns = ['ISBN', 'bookTitle', 'bookAuthor', 'yearOfPublication', 'publisher', 'imageUrlS', 'imageUrlM', 'imageUrlL']
@@ -59,3 +60,5 @@ for i in range(0, len(distances.flatten())):
     else:
         print('{0}: {1}, with distance of {2}:'.format(i, us_canada_user_rating_pivot.index[indices.flatten()[i]], distances.flatten()[i]))
 
+#modeli kaydet
+pickle.dump(model_knn, open('model.pkl', 'wb'))
