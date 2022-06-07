@@ -32,15 +32,15 @@
                 </form>
             </div>
 
-            {% if data %}
+            {% if books %}
 
-             {% for i in data %}
+             {% for i in books %}
                 <div class="col-md-3" style="margin-top:50px">
                     <div class="card">
                         <div class="card-body">
-                            <img class="card-img-top" src="{{i[2]}}">
+                            <img class="card-img-top" src="{{i[1]}}">
                             <p class="text-white">{{i[0]}}</p>
-                            <h4 class="text-white">{{i[1]}}</h4>
+                            <h4 class="text-white">{{i[2]}}</h4>
                         </div>
                     </div>
                 </div>
