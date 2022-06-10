@@ -14,7 +14,7 @@ ratings.columns = ['userID', 'ISBN', 'bookRating']
 
 
 combine_book_rating = pd.merge(ratings, books, on='ISBN')
-columns = ['yearOfPublication', 'publisher', 'bookAuthor', 'imageUrlS', 'imageUrlM', 'imageUrlL']
+columns = ['yearOfPublication', 'publisher', 'bookAuthor', 'imageUrlM', 'imageUrlL']
 combine_book_rating = combine_book_rating.drop(columns, axis=1)
 #print(combine_book_rating.head())
 
@@ -52,6 +52,7 @@ model_knn = NearestNeighbors(metric = 'cosine', algorithm = 'brute')
 model_knn.fit(us_canada_user_rating_matrix)
 
 query_index = np.random.choice(us_canada_user_rating_pivot.shape[0])
+print(query_index)
 distances, indices = model_knn.kneighbors(us_canada_user_rating_pivot.iloc[query_index, :].values.reshape(1, -1), n_neighbors = 6)
 
 for i in range(0, len(distances.flatten())):
@@ -60,5 +61,3 @@ for i in range(0, len(distances.flatten())):
     else:
         print('{0}: {1}, with distance of {2}:'.format(i, us_canada_user_rating_pivot.index[indices.flatten()[i]], distances.flatten()[i]))
 
-#modeli kaydet
-pickle.dump(model_knn, open('model.pkl', 'wb'))
